@@ -8,45 +8,47 @@ import User.User;
 
 public class WriteData {
     public Flight[] addDummyFlights() {
-        // Add dummy hotels to the file
+
         String csvFile = "./Data/ProgramData/Flights.csv";
-            try (FileWriter writer = new FileWriter(csvFile)) {
-                Flight[] tempFlight = CreateDummyFlights();
-                for (int i = 0; i < tempFlight.length; i++) {
-                    writer.append(tempFlight[i].toString() + "\n");
-                }
-                writer.flush();
-                return tempFlight;
-            } catch (IOException e2) {
-                System.err.println("Error writing CSV file: " + e2.getMessage());
-                return new Flight[0];
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            Flight[] tempFlight = CreateDummyFlights();
+            for (int i = 0; i < tempFlight.length; i++) {
+                writer.append(tempFlight[i].toString() + "\n");
             }
+            writer.flush();
+            return tempFlight;
+        } catch (IOException e2) {
+            System.err.println("Error writing CSV file: " + e2.getMessage());
+            return new Flight[0];
+        }
     }
+
     public Hotel[] addDummyHotels() {
-        // Add dummy flights to the file
+
         String csvFile = "./Data/ProgramData/Hotels.csv";
-            try (FileWriter writer = new FileWriter(csvFile)) {
-                Hotel[] tempHotel = CreateDummyHotels();
-                for (int i = 0; i < tempHotel.length; i++) {
-                    writer.append(tempHotel[i].toString() + "\n");
-                }
-                writer.flush();
-                return tempHotel;
-            } catch (IOException e2) {
-                System.err.println("Error writing CSV file: " + e2.getMessage());
-                return new Hotel[0];
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            Hotel[] tempHotel = CreateDummyHotels();
+            for (int i = 0; i < tempHotel.length; i++) {
+                writer.append(tempHotel[i].toString() + "\n");
             }
+            writer.flush();
+            return tempHotel;
+        } catch (IOException e2) {
+            System.err.println("Error writing CSV file: " + e2.getMessage());
+            return new Hotel[0];
+        }
     }
-    //add dummy user
+
     public void createUserFile() {
-        // Add dummy flights to the file
+
         String csvFile = "./Data/UserData/Users.csv";
-            try (FileWriter writer = new FileWriter(csvFile)) {
-                
-            } catch (IOException e2) {
-                System.err.println("Error creating CSV file: " + e2.getMessage());
-            }
+        try (FileWriter writer = new FileWriter(csvFile)) {
+
+        } catch (IOException e2) {
+            System.err.println("Error creating CSV file: " + e2.getMessage());
+        }
     }
+
     private Hotel[] CreateDummyHotels() {
         Hotel[] hotels = new Hotel[20];
         hotels[0] = new Hotel("1,Washington,500,100" + RandomSeats());
@@ -71,6 +73,7 @@ public class WriteData {
         hotels[19] = new Hotel("20,Los Angeles,50,20" + RandomSeats());
         return hotels;
     }
+
     private Flight[] CreateDummyFlights() {
         Flight[] flights = new Flight[20];
         flights[0] = new Flight("1,Washington,Delhi,500" + RandomSeats());
@@ -95,6 +98,7 @@ public class WriteData {
         flights[19] = new Flight("20,Los Angeles,San Francisco,50" + RandomSeats());
         return flights;
     }
+
     private String RandomSeats() {
         String line = "";
         for (int i = 0; i < 31; i++) {
@@ -102,11 +106,47 @@ public class WriteData {
         }
         return line;
     }
-    // a function to write the user to the file
+
     public void WriteUser(User user) {
         String csvFile = "./Data/UserData/Users.csv";
         try (FileWriter writer = new FileWriter(csvFile, true)) {
             writer.append(user.toString() + "\n");
+            writer.flush();
+        } catch (IOException e) {
+            System.err.println("Error writing CSV file: " + e.getMessage());
+        }
+    }
+
+    public void WriteUsers(User[] users) {
+        String csvFile = "./Data/UserData/Users.csv";
+        try (FileWriter writer = new FileWriter(csvFile, true)) {
+            for (int i = 0; i < users.length; i++) {
+                writer.append(users[i].toString() + "\n");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            System.err.println("Error writing CSV file: " + e.getMessage());
+        }
+    }
+
+    public void WriteFlights(Flight[] flights) {
+        String csvFile = "./Data/ProgramData/Flights.csv";
+        try (FileWriter writer = new FileWriter(csvFile, true)) {
+            for (int i = 0; i < flights.length; i++) {
+                writer.append(flights[i].toString() + "\n");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            System.err.println("Error writing CSV file: " + e.getMessage());
+        }
+    }
+
+    public void WriteHotels(Hotel[] hotels) {
+        String csvFile = "./Data/ProgramData/Hotels.csv";
+        try (FileWriter writer = new FileWriter(csvFile, true)) {
+            for (int i = 0; i < hotels.length; i++) {
+                writer.append(hotels[i].toString() + "\n");
+            }
             writer.flush();
         } catch (IOException e) {
             System.err.println("Error writing CSV file: " + e.getMessage());

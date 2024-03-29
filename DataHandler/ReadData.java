@@ -17,7 +17,7 @@ public class ReadData {
     public ReadData() {
         flights = ReadFlights();
         hotels = ReadHotels();
-        users=ReadUsers();
+        users = ReadUsers();
     }
 
     private Flight[] ReadFlights() {
@@ -56,7 +56,7 @@ public class ReadData {
         }
         return new Hotel[0];
     }
-    // function to read the users from the file
+
     public User[] ReadUsers() {
         try (BufferedReader reader = new BufferedReader(new FileReader("./Data/UserData/Users.csv"))) {
             int size = countLines("./Data/UserData/Users.csv");
@@ -93,7 +93,7 @@ public class ReadData {
     public Hotel[] getHotels() {
         return hotels;
     }
-    // getter method for users
+
     public User[] getUsers() {
         return users;
     }

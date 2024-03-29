@@ -2,6 +2,8 @@ package User;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import DataHandler.ReadData;
+import Flight.Flight;
 
 import DataHandler.WriteData;
 
@@ -12,13 +14,11 @@ public class User {
     private String name;
     private String address;
     private String phoneNumber;
-    private String bookedFlight="-1";
-    private String bookedFlightDate="-1";
-    private String bookedHotel="-1";
-    public String[] bookedHotelDate=new String[0];
+    private String bookedFlight = "-1";
+    private String bookedFlightDate = "-1";
+    private String bookedHotel = "-1";
+    public String[] bookedHotelDate = new String[0];
 
-
-    // default constructor to initialize the data members
     public User() {
         username = "";
         password = "";
@@ -27,7 +27,7 @@ public class User {
         address = "";
         phoneNumber = "";
     }
-    // parameterised constructor to initialize the data members
+
     public User(String username, String password, String email, String name, String address, String phoneNumber) {
         this.username = username;
         this.password = password;
@@ -36,27 +36,27 @@ public class User {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
     public User(String line) {
-        String[] fields = line.split("\\|"); // Escape the '|' character
+        String[] fields = line.split("\\|");
         username = fields[0];
         password = fields[1];
         email = fields[2];
         name = fields[3];
         address = fields[4];
         phoneNumber = fields[5];
-        // Assuming you have additional fields like bookedFlight, bookedFlightDate, bookedHotel, bookedHotelDate
+
         bookedFlight = fields[6];
         bookedFlightDate = fields[7];
         bookedHotel = fields[8];
-        // Extract bookedHotelDate as an array
-        String[] bookedHotelDateArray = fields[9].substring(1, fields[9].length() - 1).split(","); // Remove '[' and ']' and split by ','
-        if (bookedHotelDateArray.length==1)  {
-            bookedHotelDateArray=new String[0];
+
+        String[] bookedHotelDateArray = fields[9].substring(1, fields[9].length() - 1).split(",");
+        if (bookedHotelDateArray.length == 1) {
+            bookedHotelDateArray = new String[0];
         }
         bookedHotelDate = new String[bookedHotelDateArray.length];
         System.arraycopy(bookedHotelDateArray, 0, bookedHotelDate, 0, bookedHotelDateArray.length);
     }
-    
 
     public String getUsername() {
         return username;
@@ -103,16 +103,18 @@ public class User {
     }
 
     public String toString() {
-        String returnString = username + "|" + password + "|" + email + "|" + name + "|" + address + "|" + phoneNumber+"|"+bookedFlight+"|"+bookedFlightDate+"|"+bookedHotel+"|[";
+        String returnString = username + "|" + password + "|" + email + "|" + name + "|" + address + "|" + phoneNumber
+                + "|" + bookedFlight + "|" + bookedFlightDate + "|" + bookedHotel + "|[";
         for (int i = 0; i < bookedHotelDate.length; i++) {
-            returnString += bookedHotelDate[i]+",";
+            returnString += bookedHotelDate[i] + ",";
         }
-        returnString+="]";
+        returnString += "]";
         return returnString;
     }
+
     public static User[] createNewUser(User[] users, WriteData writer) {
         User newUser;
-        // code to take inputs from user and make a new user object
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter username: ");
@@ -135,27 +137,95 @@ public class User {
 
         newUser = new User(username, password, email, name, address, phoneNumber);
 
-        // add the user to the users array
         User[] updatedUsers = Arrays.copyOf(users, users.length + 1);
         updatedUsers[users.length] = newUser;
         users = updatedUsers;
         writer.WriteUser(newUser);
         return users;
     }
-    public static User[] bookFlight(User[] users, String username, String flightNumber, String date) {
+
+    public static User[] bookFlight(User[] users, String username, String flightNumber, int date) {
+        String dateStr = String.valueOf(date);
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 if (user.bookedFlight != "-1") {
                     user.bookedFlight = flightNumber;
-                    user.bookedFlightDate = date;
+                    user.bookedFlightDate = dateStr;
                     return users;
-                }
-                else{
+                } else {
                     System.out.println("You have already booked a flight");
+                    user.displayBookedFlight();
                     return users;
                 }
             }
         }
         return users;
+    }
+
+    public void displayBookedFlight() {
+        ReadData reader = new ReadData();
+        Flight[] flights = reader.getFlights();
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber().equals(bookedFlight)) {
+                flight.displayFlight();
+            }
+        }
+    }
+
+    public void cancelFlight(Flight[] flights) {
+
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber().equals(bookedFlight)) {
+                int bookedFlightInt = Integer.parseInt(bookedFlight);
+                flight.CancelSeat(bookedFlightInt);
+                bookedFlight = "-1";
+                bookedFlightDate = "-1";
+            }
+        }
+        bookedFlight = "-1";
+        bookedFlightDate = "-1";
+    }
+
+    public void cancelHotel() {
+
+        for (int i = 0; i < bookedHotelDate.length; i++) {
+            int bookedHotelDateInt = Integer.parseInt(bookedHotelDate[i]);
+            ReadData reader = new ReadData();
+            Hotel.Hotel[] hotels = reader.getHotels();
+            for (Hotel.Hotel hotel : hotels) {
+                if (hotel.getHotelNumber().equals(bookedHotel)) {
+                    hotel.CancelRoom(new int[] { bookedHotelDateInt });
+                    bookedHotel = "-1";
+                    bookedHotelDate = new String[0];
+                }
+            }
+        }
+    }
+
+    public void bookHotel(String hotelNumber, int[] dates) {
+        this.bookedHotel = hotelNumber;
+        this.bookedHotelDate = new String[dates.length];
+        for (int i = 0; i < dates.length; i++) {
+            this.bookedHotelDate[i] = String.valueOf(dates[i]);
+        }
+    }
+
+    public void displayBookings() {
+        if (bookedFlight != "-1") {
+            displayBookedFlight();
+        }
+        if (bookedHotel != "-1") {
+            displayBookedHotel();
+        }
+    }
+
+    public void displayBookedHotel() {
+        ReadData reader = new ReadData();
+        Hotel.Hotel[] hotels = reader.getHotels();
+        for (Hotel.Hotel hotel : hotels) {
+            if (hotel.getHotelNumber().equals(bookedHotel)) {
+                hotel.displayRooms();
+            }
+        }
     }
 }
