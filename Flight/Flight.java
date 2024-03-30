@@ -1,7 +1,4 @@
 package Flight;
-
-import java.util.Scanner;
-
 import CustomExceptions.FlightNotFoud;
 
 public class Flight {

@@ -1,10 +1,9 @@
 package Hotel;
 
 public class Hotel {
-
+    private String hotelID;
     private String hotelName;
     private String location;
-    private String hotelID;
     private double price;
     private int[] rooms = new int[30];
 
@@ -20,9 +19,9 @@ public class Hotel {
 
     public Hotel(String line) {
         String[] fields = line.split(",");
-        hotelName = fields[0];
-        location = fields[1];
-        hotelID = fields[2];
+        hotelID = fields[0];
+        hotelName = fields[1];
+        location = fields[2];
         price = Double.parseDouble(fields[3]);
         for (int i = 0; i < 30; i++) {
             rooms[i] = Integer.parseInt(fields[i + 4]);
@@ -30,7 +29,7 @@ public class Hotel {
     }
 
     public String toString() {
-        String line = hotelName + "," + location + "," + hotelID + "," + price;
+        String line = hotelID + "," + hotelName + "," + location + "," + price;
         for (int i = 0; i < 30; i++) {
             line += "," + rooms[i];
         }
@@ -64,28 +63,31 @@ public class Hotel {
     }
 
     public static void displayHotels(Hotel[] hotels) {
-        System.out.printf("%15s || %15s || %15s || %s\n", "Hotel Name", "Location", "Hotel ID", "Price");
-        for (int i = 0; i < 65; i++) {
-            System.out.print("_");
-        }
-        System.out.println();
-        for (Hotel hotel : hotels) {
-            System.out.printf("%15s || %15s || %15s || %.2f\n", hotel.hotelName, hotel.location, hotel.hotelID,
-                    hotel.price);
+        System.out.println("Hotels available");
+        // System.out.println("Hotel ID\tHotel Name\tLocation\tPrice");
+        // do usign printf
+        System.out.printf("%15s %15s %15s %15s\n", "Hotel ID", "Hotel Name", "Location", "Price");
+        for (int i = 0; i < hotels.length; i++) {
+            System.out.printf("%15s %15s %15s %15.2f\n", hotels[i].hotelID, hotels[i].hotelName, hotels[i].location,hotels[i].price);
         }
     }
 
     public void displayRooms() {
         System.out.println("Rooms available for hotel " + hotelID);
-        System.out.println("Day\tRooms");
         for (int i = 0; i < 30; i++) {
-            System.out.printf("%3d\t%d\n", i + 1, rooms[i]);
+            System.out.printf("Day %3d :- %d\n", i + 1, rooms[i]);
             System.out.println();
         }
     }
 
     public String getHotelNumber() {
         return hotelID;
+    }
+    public void displayHotel() {
+        System.out.println("Hotel ID: " + hotelID);
+        System.out.println("Hotel Name: " + hotelName);
+        System.out.println("Location: " + location);
+        System.out.println("Price: " + price);
     }
 
 }

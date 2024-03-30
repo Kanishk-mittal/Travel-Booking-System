@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 import DataHandler.ReadData;
 import Flight.Flight;
-
 import DataHandler.WriteData;
 
 public class User {
@@ -173,7 +172,6 @@ public class User {
     }
 
     public void cancelFlight(Flight[] flights) {
-
         for (Flight flight : flights) {
             if (flight.getFlightNumber().equals(bookedFlight)) {
                 int bookedFlightInt = Integer.parseInt(bookedFlight);
@@ -187,7 +185,6 @@ public class User {
     }
 
     public void cancelHotel() {
-
         for (int i = 0; i < bookedHotelDate.length; i++) {
             int bookedHotelDateInt = Integer.parseInt(bookedHotelDate[i]);
             ReadData reader = new ReadData();
@@ -212,9 +209,11 @@ public class User {
 
     public void displayBookings() {
         if (bookedFlight != "-1") {
+            System.out.println("===BOOKED FLIGHT===");
             displayBookedFlight();
         }
         if (bookedHotel != "-1") {
+            System.out.println("===BOOKED HOTEL===");
             displayBookedHotel();
         }
     }
@@ -224,7 +223,12 @@ public class User {
         Hotel.Hotel[] hotels = reader.getHotels();
         for (Hotel.Hotel hotel : hotels) {
             if (hotel.getHotelNumber().equals(bookedHotel)) {
-                hotel.displayRooms();
+                hotel.displayHotel();
+                System.out.print("Booked for the following dates: ");
+                for (int i = 0; i < bookedHotelDate.length; i++) {
+                    System.out.print(bookedHotelDate[i]+" ,");
+                }
+                System.out.println();
             }
         }
     }

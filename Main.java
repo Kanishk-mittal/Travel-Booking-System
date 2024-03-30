@@ -76,29 +76,22 @@ public class Main {
             System.out.println("6. Exit");
             Scanner scanner = new Scanner(System.in);
             int choice;
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-                break;
-            } else {
-                System.out.println("Invalid choice. Please enter a number.");
-                scanner.next();
-                choice = -1;
-            }
+            choice = scanner.nextInt();
             if (choice == 1) {
                 bookFlight(scanner);
             }
-            if (choice == 2) {
+            else if (choice == 2) {
                 cancelFlight(scanner);
             }
-            if (choice == 3) {
+            else if (choice == 3) {
                 bookHotel(scanner);
-            } else if (choice == 4) {
+            }else  if (choice == 4) {
                 currentUser.cancelHotel();
-            } else if (choice == 5) {
+            }else  if (choice == 5) {
                 currentUser.displayBookings();
-            } else if (choice == 6) {
+            }else  if (choice == 6) {
                 break;
-            } else if (choice == -1) {
+            }else  if (choice == -1) {
                 continue;
             } else {
                 System.out.println("Invalid choice. Please try again.");
@@ -110,6 +103,7 @@ public class Main {
     }
 
     private static void bookFlight(Scanner scanner) {
+        System.out.println("function called");
         Flight.displayFlights(flights);
         System.out.print("Enter the flight number you want to book: ");
         String flightNumber = scanner.next();
@@ -175,7 +169,8 @@ public class Main {
         String hotelNumber = scanner.next();
         boolean validHotelNumber = false;
         for (Hotel hotel : hotels) {
-            if (hotel.getHotelNumber().equals(hotelNumber)) {
+            System.out.println("Corrent number:- "+hotel.getHotelNumber()+" Entered number:- "+hotelNumber);
+            if (hotel.getHotelNumber().equals(hotelNumber)){;
                 validHotelNumber = true;
                 break;
             }

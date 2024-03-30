@@ -51,26 +51,26 @@ public class WriteData {
 
     private Hotel[] CreateDummyHotels() {
         Hotel[] hotels = new Hotel[20];
-        hotels[0] = new Hotel("1,Washington,500,100" + RandomSeats());
-        hotels[1] = new Hotel("2,Londono,200,50" + RandomSeats());
-        hotels[2] = new Hotel("3,Paris,300,100" + RandomSeats());
-        hotels[3] = new Hotel("4,Beijing,100,30" + RandomSeats());
-        hotels[4] = new Hotel("5,Tokyo,150,40" + RandomSeats());
-        hotels[5] = new Hotel("6,Los Angeles,50,20" + RandomSeats());
-        hotels[6] = new Hotel("7,Chicago,100,30" + RandomSeats());
-        hotels[7] = new Hotel("8,New York,50,20" + RandomSeats());
-        hotels[8] = new Hotel("9,Delhi,200,50" + RandomSeats());
-        hotels[9] = new Hotel("10,Moscow,150,40" + RandomSeats());
-        hotels[10] = new Hotel("11,Shanghai,100,30" + RandomSeats());
-        hotels[11] = new Hotel("12,Seoul,200,50" + RandomSeats());
-        hotels[12] = new Hotel("13,San Francisco,100,30" + RandomSeats());
-        hotels[13] = new Hotel("14,New York,50,20" + RandomSeats());
-        hotels[14] = new Hotel("15,Washington,500,100" + RandomSeats());
-        hotels[15] = new Hotel("16,Londono,200,50" + RandomSeats());
-        hotels[16] = new Hotel("17,Paris,300,100" + RandomSeats());
-        hotels[17] = new Hotel("18,Beijing,100,30" + RandomSeats());
-        hotels[18] = new Hotel("19,Tokyo,150,40" + RandomSeats());
-        hotels[19] = new Hotel("20,Los Angeles,50,20" + RandomSeats());
+        hotels[0] = new Hotel("1,Taj Hotel,Washington,100" + RandomSeats());
+        hotels[1] = new Hotel("2,Marriot,London,200" + RandomSeats());
+        hotels[2] = new Hotel("3,Hyatt,Paris,300" + RandomSeats());
+        hotels[3] = new Hotel("4,Grand Hotel,Beijing,100" + RandomSeats());
+        hotels[4] = new Hotel("5,The Ritz,Tokyo,150" + RandomSeats());
+        hotels[5] = new Hotel("6,The Peninsula,Los Angeles,50" + RandomSeats());
+        hotels[6] = new Hotel("7,The Four Seasons,Chicago,100" + RandomSeats());
+        hotels[7] = new Hotel("8,The Plaza,New York,50" + RandomSeats());
+        hotels[8] = new Hotel("9,The Oberoi,Delhi,200" + RandomSeats());
+        hotels[9] = new Hotel("10,The Ritz,Moscow,150" + RandomSeats());
+        hotels[10] = new Hotel("11,The Peninsula,Shanghai,100" + RandomSeats());
+        hotels[11] = new Hotel("12,The Four Seasons,Seoul,200" + RandomSeats());
+        hotels[12] = new Hotel("13,The Plaza,San Francisco,100" + RandomSeats());
+        hotels[13] = new Hotel("14,The Oberoi,New York,50" + RandomSeats());
+        hotels[14] = new Hotel("15,Taj Hotel,Washington,100" + RandomSeats());
+        hotels[15] = new Hotel("16,Marriot,London,200" + RandomSeats());
+        hotels[16] = new Hotel("17,Hyatt,Paris,300" + RandomSeats());
+        hotels[17] = new Hotel("18,Grand Hotel,Beijing,100" + RandomSeats());
+        hotels[18] = new Hotel("19,The Ritz,Tokyo,150" + RandomSeats());
+        hotels[19] = new Hotel("20,The Peninsula,Los Angeles,50" + RandomSeats());
         return hotels;
     }
 
@@ -119,7 +119,7 @@ public class WriteData {
 
     public void WriteUsers(User[] users) {
         String csvFile = "./Data/UserData/Users.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) {
+        try (FileWriter writer = new FileWriter(csvFile, false)) {
             for (int i = 0; i < users.length; i++) {
                 writer.append(users[i].toString() + "\n");
             }
@@ -131,7 +131,7 @@ public class WriteData {
 
     public void WriteFlights(Flight[] flights) {
         String csvFile = "./Data/ProgramData/Flights.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) {
+        try (FileWriter writer = new FileWriter(csvFile, false)) {
             for (int i = 0; i < flights.length; i++) {
                 writer.append(flights[i].toString() + "\n");
             }
@@ -143,7 +143,7 @@ public class WriteData {
 
     public void WriteHotels(Hotel[] hotels) {
         String csvFile = "./Data/ProgramData/Hotels.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) {
+        try (FileWriter writer = new FileWriter(csvFile, false)) {
             for (int i = 0; i < hotels.length; i++) {
                 writer.append(hotels[i].toString() + "\n");
             }
