@@ -167,16 +167,6 @@ Hotels available
              19        The Ritz           Tokyo        15055.00
              20   The Peninsula     Los Angeles         5062.00
 Enter the hotel number you want to book: 10
-Corrent number:- 1 Entered number:- 10
-Corrent number:- 2 Entered number:- 10
-Corrent number:- 3 Entered number:- 10
-Corrent number:- 4 Entered number:- 10
-Corrent number:- 5 Entered number:- 10
-Corrent number:- 6 Entered number:- 10
-Corrent number:- 7 Entered number:- 10
-Corrent number:- 8 Entered number:- 10
-Corrent number:- 9 Entered number:- 10
-Corrent number:- 10 Entered number:- 10
 Rooms available for hotel 10
 Day   1 :- 55
 

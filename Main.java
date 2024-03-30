@@ -169,7 +169,6 @@ public class Main {
         String hotelNumber = scanner.next();
         boolean validHotelNumber = false;
         for (Hotel hotel : hotels) {
-            System.out.println("Corrent number:- "+hotel.getHotelNumber()+" Entered number:- "+hotelNumber);
             if (hotel.getHotelNumber().equals(hotelNumber)){;
                 validHotelNumber = true;
                 break;
