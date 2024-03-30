@@ -88,7 +88,7 @@ public class Main {
             }else  if (choice == 4) {
                 currentUser.cancelHotel();
             }else  if (choice == 5) {
-                currentUser.displayBookings();
+                currentUser.displayBookings(flights, hotels);
             }else  if (choice == 6) {
                 break;
             }else  if (choice == -1) {
@@ -157,7 +157,7 @@ public class Main {
         }
         if (flightBooked) {
             System.out.println("Flight booked successfully");
-            users = User.bookFlight(users, currentUser.getUsername(), flightNumber, date);
+            users = User.bookFlight(users, currentUser.getUsername(), flightNumber, date,flights);
         } else {
             System.out.println("Flight booking failed.Please Try again");
         }
@@ -231,7 +231,7 @@ public class Main {
 
     private static void cancelFlight(Scanner scanner) {
         System.out.println("Do you really want to cancel your following flight?(yes/no)");
-        currentUser.displayBookedFlight();
+        currentUser.displayBookedFlight(flights);
         String confirmation = scanner.next();
         if (confirmation.equals("yes")) {
             currentUser.cancelFlight(flights);
